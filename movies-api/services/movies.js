@@ -16,6 +16,11 @@ class MoviesService {
     return createMovieId;
   }
 
+  async updatePartialMovie() {
+    const updatePartialMovie = await Promise.resolve(moviesMock[0].id);
+    return updatePartialMovie;
+  }
+
   async updateMovie() {
     const updateMovieId = await Promise.resolve(moviesMock[0].id);
     return updateMovieId;

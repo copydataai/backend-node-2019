@@ -60,6 +60,23 @@ function moviesApi(app) {
     }
   });
 
+  router.patch('/:movieId', async function (req, res, next) {
+    const { movieId } = req.params;
+    const { body: movie } = req;
+    try {
+      const updatedMovieId = await moviesService.updatePartialMovie({
+        movieId,
+        movie,
+      });
+      res.status(200).json({
+        data: updatedMovieId,
+        message: 'movies updated partially',
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
   router.delete('/:movieId', async function (req, res, next) {
     const { movieId } = req.params;
     try {
