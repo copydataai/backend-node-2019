@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('morgan');
 
 const app = express();
 
@@ -13,6 +14,7 @@ const {
 
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
+app.use(logger('dev'));
 // Body parser
 app.use(express.json());
 
