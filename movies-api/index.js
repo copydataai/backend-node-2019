@@ -6,6 +6,7 @@ const router = require('./routes/movies');
 const { config } = require('./config');
 const moviesApi = require('./routes/movies');
 
+app.use(express.json());
 moviesApi(app);
 
 app.listen(config.port, () => {

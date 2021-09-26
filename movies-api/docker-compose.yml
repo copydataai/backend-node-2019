@@ -4,7 +4,7 @@ services:
     image: mongo:4.4
     restart: always
     environment:
-      MONGO_INTIDB_DATABASE: video
+      MONGO_INITDB_DATABASE: videos
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:

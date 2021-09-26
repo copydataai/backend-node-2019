@@ -8,10 +8,11 @@ function moviesApi(app) {
   const moviesService = new MoviesService();
 
   router.get('/', async function (req, res, next) {
+    const { tags } = req.query;
     try {
-      const data = await moviesService.getMovies();
+      const movies = await moviesService.getMovies({ tags });
       res.status(200).json({
-        data: data,
+        data: movies,
         message: 'movies Listend',
       });
     } catch (error) {
@@ -35,7 +36,7 @@ function moviesApi(app) {
     const { body: movie } = req;
     try {
       const createdMovieId = await moviesService.createMovie({ movie });
-      res.status(200).json({
+      res.status(201).json({
         data: createdMovieId,
         message: 'movie Create',
       });
