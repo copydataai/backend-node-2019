@@ -20,7 +20,7 @@ function moviesApi(app) {
       const movies = await moviesService.getMovies({ tags });
       res.status(200).json({
         data: movies,
-        message: 'movies Listend',
+        message: 'movie listed',
       });
     } catch (error) {
       next(error);
