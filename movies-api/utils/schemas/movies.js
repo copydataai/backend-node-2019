@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const movieIdSchema = joi.string().regex(/^[0-9afA-F](24)$/);
+const movieIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const movieTitleSchema = joi.string().max(80);
 const movieYearSchema = joi.number().min(1888).max(2077);
 const movieCoverSchema = joi.string().uri();
