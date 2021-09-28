@@ -6,6 +6,8 @@ const {
   updateMovieSchema,
 } = require('../utils/schemas/movies');
 
+const buildMessage = require('../utils/buildMessage');
+
 const validationHandler = require('../utils/middleware/validationHandler');
 
 function moviesApi(app) {
@@ -20,7 +22,7 @@ function moviesApi(app) {
       const movies = await moviesService.getMovies({ tags });
       res.status(200).json({
         data: movies,
-        message: 'movie listed',
+        message: buildMessage('movie', 'list'),
       });
     } catch (error) {
       next(error);
@@ -36,7 +38,7 @@ function moviesApi(app) {
         const data = await moviesService.getMovie({ movieId });
         res.status(200).json({
           data: data,
-          message: 'movie retrieve',
+          message: buildMessage('movie', 'retrieve'),
         });
       } catch (error) {
         next(error);
@@ -52,7 +54,7 @@ function moviesApi(app) {
         const createdMovieId = await moviesService.createMovie({ movie });
         res.status(201).json({
           data: createdMovieId,
-          message: 'movie Create',
+          message: buildMessage('movie', 'create'),
         });
       } catch (error) {
         next(error);
@@ -73,7 +75,7 @@ function moviesApi(app) {
         });
         res.status(200).json({
           data: updatedMovieId,
-          message: 'movies updated',
+          message: 'movie update',
         });
       } catch (error) {
         next(error);
@@ -95,7 +97,7 @@ function moviesApi(app) {
         });
         res.status(200).json({
           data: updatedMovieId,
-          message: 'movies updated partially',
+          message: 'movie update partially',
         });
       } catch (error) {
         next(error);
@@ -112,7 +114,7 @@ function moviesApi(app) {
         const deleteMovieId = await moviesService.deleteMovie({ movieId });
         res.status(200).json({
           data: deleteMovieId,
-          message: 'movies deleted',
+          message: 'movies delete',
         });
       } catch (error) {
         next(error);

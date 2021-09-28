@@ -21,9 +21,57 @@ describe('routes - movies', function () {
           data: moviesMock,
           message: 'movies listed',
         });
-
         done();
       });
+    });
+    it('Should respond with the specific get movie', function (done) {
+      request.get('/api/movies/5f240efcf373ccfcf8ec4750').end((err, res) => {
+        assert.notStrictEqual(res.body, {
+          data: moviesMock[0],
+          message: 'movie retrieved',
+        });
+        done();
+      });
+    });
+  });
+  describe('POST /movies', function () {
+    it('should respond with created a movie', function (done) {
+      request
+        .post('/api/movies')
+        .send(moviesMock[1])
+        .end((err, res) => {
+          assert.notDeepEqual(res.body, {
+            data: moviesMock[1],
+            message: 'movie create',
+          });
+        });
+      done();
+    });
+  });
+  describe('PUT /movies', function () {
+    it('should respond for update a movie', function (done) {
+      const change = 1950;
+      moviesMock[1].duration = change;
+      request
+        .put('/api/movies/5f240efcf373ccfcf8ec4750')
+        .send(moviesMock[1])
+        .end((err, res) => {
+          assert.notDeepEqual(res.body, {
+            data: moviesMock[1],
+            message: 'movie update',
+          });
+        });
+      done();
+    });
+  });
+  describe('DELETE /movies', function () {
+    it('should respond a delete mvoie', function (done) {
+      request.delete('/api/movies/5f240efcf373ccfcf8ec4750').end((err, res) => {
+        assert.notDeepEqual(res.body, {
+          message: 'movie delete',
+        });
+      });
+      done();
     });
   });
 });
